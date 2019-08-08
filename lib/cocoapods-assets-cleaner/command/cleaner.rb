@@ -6,30 +6,36 @@ include CocoapodsAssetsCleaner
 module Pod
   class Command
 
-    class Cleaner < Command
-      self.summary = 'Short description of cocoapods-assets-cleaner.'
+    class CleanUnusedAssets < Command
+      self.summary = 'Cocoapods-plugin that helps to clean unused assets on Xcode projects.'
 
       self.description = <<-DESC
-        Longer description of cocoapods-assets-cleaner.
+        Assets-cleaner is a Cocoapods-plugin that helps to clean unused assets on Xcode projects.
       DESC
 
-      # self.arguments = 'NAME'
-
-      # def initialize(argv)
-      #   @name = argv.shift_argument
-      #   super
-      # end
-
-      # def validate!
-      #   super
-      #   help! 'A Pod name is required.' unless @name
-      # end
+      def validate!
+        super
+        help! 'Define the assets path.' unless @assets_path
+      end
 
       self.arguments = []
 
+      def self.options
+        [
+          ['--assets-path', 'Assets path'],
+          ['--project-path', 'Projects path (default: ./)']
+        ].concat(super)
+      end
+
+      def initialize(argv)
+        @assets_path = argv.option('assets-path')
+        @project_path = argv.option('project-path', './')
+        super
+      end
+
       def run
-        #UI.puts "Add your implementation for the cocoapods-assets-cleaner plugin in #{__FILE__}"
-        CocoapodsAssetsCleaner::AssetsCleaner.new.clean()
+        assets_cleaner = CocoapodsAssetsCleaner::AssetsCleaner.new(@project_path, @assets_path)
+        assets_cleaner.init_clean()
       end
     end
   end
