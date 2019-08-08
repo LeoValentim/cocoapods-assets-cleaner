@@ -25,7 +25,7 @@ Assets-cleaner is a cocoapods-plugin that helps to clean assets from unused imag
 
 ## Usage
 
-Run `pod clean-unused-assets --assets-path=./path/to/Assets.xcassets` with `--assets-path` to indicate where is Assets.xcassets on your project:
+Run `pod clean-unused-assets` command with `--assets-path` to indicate where is Assets.xcassets on your project:
 
     $ pod clean-unused-assets --assets-path=./path/to/Assets.xcassets
     
