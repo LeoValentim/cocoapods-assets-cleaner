@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['leo.valent@hotmail.com']
   spec.description   = %q{Assets-cleaner is a Cocoapods-plugin that helps to clean unused assets on Xcode projects.}
   spec.summary       = %q{Cocoapods-plugin that helps to clean unused assets on Xcode projects.}
-  spec.homepage      = 'https://github.com/EXAMPLE/cocoapods-assets-cleaner'
+  spec.homepage      = 'https://github.com/LeoValentim/cocoapods-assets-cleaner/'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
