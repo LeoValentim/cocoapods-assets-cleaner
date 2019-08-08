@@ -1,6 +1,6 @@
 # cocoapods-assets-cleaner
 
-Assets-cleaner is a cocoapods-plugin thet helps to clean assets from unused images on Xcode projects.
+Assets-cleaner is a cocoapods-plugin that helps to clean assets from unused images on Xcode projects.
 
 ## Getting Started
 
