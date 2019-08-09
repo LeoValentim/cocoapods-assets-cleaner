@@ -32,3 +32,7 @@ Run `pod clean-unused-assets` command with `--assets-path` to indicate where is 
 You can also define a specific directory for the plugin to search for unused assets. Just add  `--project-path`:
 
     $ pod clean-unused-assets --assets-path=./path/to/Assets.xcassets --project-path=./optional/path/
+    
+Use `--exclude-dir` define a directory to exclude from asset use search. (default: {project-path - assets-path: Assets.xcassets}):
+
+    $ pod clean-unused-assets --assets-path=./path/to/Assets.xcassets --project-path=./optional/path/ --exclude-dir=path/to/exclude/dir/relative/to/projectpath

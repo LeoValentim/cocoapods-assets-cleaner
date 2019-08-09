@@ -3,9 +3,10 @@ require "fileutils"
 
 module CocoapodsAssetsCleaner
   class AssetsCleaner
-    def initialize(main_project_path_param, assets_path_param)
+    def initialize(main_project_path_param, assets_path_param, excluded_dir_param)
       @main_project_path = main_project_path_param
       @assets_path = assets_path_param
+      @excluded_dir = excluded_dir_param
 
       @spinner = Enumerator.new do |e|
         loop do
@@ -23,7 +24,7 @@ module CocoapodsAssetsCleaner
       Pod::UI.puts "#{imagesets.count} images founded"
 
       Pod::UI.puts "Searching for unused images...".yellow
-      unused_imagesets = check_and_extact_unsed_images(imagesets, @main_project_path)
+      unused_imagesets = check_and_extact_unsed_images(imagesets, @main_project_path, @excluded_dir)
       Pod::UI.puts "#{unused_imagesets.count} unused images founded"
 
       Pod::UI.puts "Removing unused images...".yellow
@@ -33,7 +34,6 @@ module CocoapodsAssetsCleaner
 
     def show_indicator_percentage(i)
       printf("\r%d%% %s", i, @spinner.next)
-      sleep(0.1)
     end
 
     def remove_unused_image(image_name, image_path)
@@ -47,12 +47,12 @@ module CocoapodsAssetsCleaner
       end
     end
 
-    def check_and_extact_unsed_images(images, path)
+    def check_and_extact_unsed_images(images, path, excluded_dir)
       unused_images = {}
       count = 0
 
       images.each do |image_name, image_path|
-        command_sh = `grep -R -l --exclude-dir=Assets.xcassets "#{image_name}" #{path}`
+        command_sh = `grep -R -l --exclude-dir=#{excluded_dir} "#{image_name}" #{path}`
         if command_sh == ""
           Pod::UI.puts "\r#{image_name} is not used.".yellow
           unused_images[image_name] = image_path
